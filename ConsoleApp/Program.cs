@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 using MathNet.Numerics.LinearAlgebra;
-using MathNet.Numerics.LinearAlgebra.Complex32;
 
 namespace ConsoleApp {
 
@@ -12,16 +9,28 @@ namespace ConsoleApp {
         static void Main(string[] args) {
             var startNew = Stopwatch.StartNew();
             startNew.Start();
-            Matrix<double> matrixC;
-            {
-                var matrixA = Matrix<double>.Build.Random(3000, 4000);
-                var matrixB = Matrix<double>.Build.Random(4000, 3000);
-                matrixC = matrixA * matrixB;
-            }
+//            Matrix<double> matrixC;
+//            {
+//                var matrixA = Matrix<double>.Build.Random(3000, 4000);
+//                var matrixB = Matrix<double>.Build.Random(4000, 3000);
+//                matrixC = matrixA * matrixB;
+//            }
+            var result = Fibonacci(47);
             startNew.Stop();
-            Console.WriteLine(matrixC);
+            Console.WriteLine(result);
             Console.WriteLine(startNew.Elapsed);
             // 21 sec
+//            Console.WriteLine(unchecked((int) (float) int.MaxValue));
+        }
+
+        private static long Fibonacci(int n) {
+            return n switch {
+                0 => throw new ArgumentException(),
+                1 => 1,
+                2 => 1,
+                3 => 2,
+                _ => (Fibonacci(n - 1) + Fibonacci(n - 2))
+            };
         }
 
     }
